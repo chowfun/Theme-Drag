@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{#color:链接颜色|value:"#65CF82"}
+	{#color:链接悬停颜色|value:"#65CF82"}
+	{#text:社交网络.新浪微博|value:""}
+	{#text:社交网络.人人|value:""}
+	{#text:社交网络.腾讯微博|value:""}
+	{#text:社交网络.豆瓣|value:""}
+	{$meta.syntaxhighlighter}
+	{#sys:notes.text_color|value:"#7F8082"}
+	{#sys:notes.link_color|value:$_链接颜色}
+	{#sys:notes.width|value:"800"}
+	{#sys:notes.block_bg_color|value:"#EEEEEE"}
+	{#sys:notes.block_bg_opacity|value:"0"}
+	{#sys:video.player_width|value:"800"}
+	{#sys:photo.auto_size_limit|value:"800"}
+    <meta charset="utf-8">
+    <title>{$meta.title}</title>
+    <meta name="description" content="{$meta.description|nohtml}">
+    <meta name="keywords" content="{$meta.keywords|nohtml}">
+    <link href="{$meta.rss}" rel="alternate" title="订阅{$global.name|nohtml}" type="application/rss+xml">
+    <link rel="shortcut icon" type="image/jpeg" href="{$meta.favicon}">
+    <link rel="apple-touch-icon" href="{$meta.mobile_icon}">
+    <script type='text/javascript' src='http://t.libdd.com/js/libs/jquery/jquery-1.7-latest.js'></script>    
+    <link rel="stylesheet" href="http://t.libdd.com/css/base/rich-content.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <script src="/js/lib/jquery-ui-1.8.14.js" type="text/javascript"></script>
+	<script src="/js/jquery.hoverIntent.js" type="text/javascript"></script>
+	<script type="text/javascript" src="/js/main.js"></script> 
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function() {
+			Ventures.initialize();
+		});
+	</script>
+	<!--[if IE 9]>
+    	<style>
+    		img {
+    			border: none;
+    		}
+    	</style>
+    <![endif]-->
+	<!--[if IE 7]>
+    	<style>
+    		img {
+    			border: none;
+    		}
+    		div#footer ul li {
+    			float: left
+    		}
+    		div#footer ul{
+    			margin-left: 160px;
+    			margin-top: -20px;
+    			z-index: 1001;
+    		}
+    		.last div {	
+				background: #000000;
+				filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#33000000,endColorstr=#33000000);
+				margin-top: 22px;
+				margin-left: -32px;
+			}
+			.last div a:hover {	
+				background: #000000;
+				filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4D000000,endColorstr=#4D000000);
+			}
+			#ventures .tile_hover {
+    			background: url("/img/visit.png") no-repeat scroll center center;
+    			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000,endColorstr=#99000000);
+    		}
+    	</style>
+    <![endif]-->
+    <!--[if IE 8]>
+    	<style>
+    		img {
+    			border: none;
+    		}
+    		.last div {	
+				background: #000000;
+				filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#33000000,endColorstr=#33000000);
+			}
+			.last div a:hover {	
+				background: #000000;
+				filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4D000000,endColorstr=#4D000000);
+			}
+			#ventures .tile_hover {
+    			background: url("/img/visit.png") no-repeat scroll center center;
+    			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000,endColorstr=#99000000);
+    		}
+    	</style>
+    <![endif]-->
+    <style>
+    	a,div.page a{
+    		color: {$_链接颜色}
+    	}
+    	a:hover,div.page a:hover {
+    		color: {$_链接悬停颜色}
+    	}
+    	div#intro a {
+    		color: {$_链接颜色}
+    	}
+    	div#intro a:hover {
+    		color: {$_链接悬停颜色}
+    	}
+    </style>
+    <script type="text/javascript">
+		var timeout         = 500;
+		var closetimer		= 0;
+		var ddmenuitem      = 0;
+
+		// open hidden layer
+		function mopen(id) {	
+			// cancel close timer
+			mcancelclosetime();
+			// close old layer
+			if(ddmenuitem) ddmenuitem.style.visibility = 'hidden';
+			// get new layer and show it
+				ddmenuitem = document.getElementById(id);
+				ddmenuitem.style.visibility = 'visible';
+			}
+			// close showed layer
+			function mclose(){
+				if(ddmenuitem) ddmenuitem.style.visibility = 'hidden';
+			}
+			// go close timer
+			function mclosetime(){
+				closetimer = window.setTimeout(mclose, timeout);
+			}
+			// cancel close timer
+			function mcancelclosetime(){
+				if(closetimer){
+					window.clearTimeout(closetimer);
+					closetimer = null;
+				}
+			}
+			// close layer when click-out
+			document.onclick = mclose; 
+	</script>
+</head>
+<body>
+	<div id="header" class="container">
+		<ul class="nav_left">		
+			<li ><a href="{$global.archive_url}" class="current">存档</a></li>
+			{?inbox}<li ><a href="{$inbox.url}" title="{$inbox.title|nohtml}">{$inbox.title|truncate:"6":"..."}</a></li>{/inbox}
+		</ul>
+		
+		<a href="/" class="logo" title="{$global.name|nohtml}"><img src="{$global.cover_200}" /></a>
+		
+		<ul class="nav_right">
+			{?contribute}<li ><a href="{$contribute.url}" title="{$contribute.title|nohtml}">{$contribute.title|truncate:"6":"..."}</a></li>{/contribute}
+			<li class="last">
+				<a href="#" onmouseover="mopen('sub')" onmouseout="mclosetime()">页面</a>
+				<div id="sub" onmouseover="mcancelclosetime()" onmouseout="mclosetime()">
+					<a href="{$meta.rss}" title="订阅">订阅</a>
+					{?pages}
+						{?loop:pages}
+						<a href="{$page.url}" rel="tag">{$page.title|truncate:"10":"..."}</a>
+						{/loop:pages}
+					{/pages}
+				</div>
+			</li>
+		</ul>
+	</div>	
+	<div class="shadow up"></div>
+	
+	<div id="intro" class="container">
+		<p>{$global.description}</p>
+	</div>
+	{?view.list}
+	<div id="ventures">
+		<span class="link_trigger"></span>
+		<span class="tile_hover"></span>
+		<div id="ventures_viewport">
+			<div id="ventures_wall">
+				<div class="empty_tile first"></div>
+				{?loop:posts} 
+				{?post.text}<!--text-->
+				<div class="tile">
+					<div class="content">
+						{?text.thumbnail}<img src="{$text.thumbnail.500.src}" height="320"/>{/text.thumbnail}
+						{?!text.thumbnail}
+						<p class="fixword">{$text.title|truncate:"15":"..."}</p>
+						<div class="fixdes">{$text.summary|nohtml_truncate:"25":"..."}</div>
+						<p class="fixdate">{$post.date|date_format:"short_month_en"} {$post.date|date_format:"day_of_month"}, {$post.date|date_format:"year"}</p>
+						<img class="fiximg" src="/img/no.png"/>
+						{/!text.thumbnail}
+						<span>{$post.url}</span>
+					</div>
+				</div>
+				{/post.text}
+				
+				{?post.photo}
+				<div class="tile">
+					<div class="content">
+					{?loop:photos}
+						{?photos@first}
+						<img src="{$photo.500.src}" height="320"/>
+						{/photos@first}
+					{/loop:photos}
+						<span>{$post.url}</span>
+					</div>
+				</div>
+				{/post.photo}
+				
+				{?post.link}
+				<div class="tile">
+					<div class="content">
+						<p class="fixword">{$link.title|truncate:"15":"..."}</p>
+						<div class="fixdes">{$link.description|nohtml_truncate:"25":"..."}</div>
+						<p class="fixdate">{$post.date|date_format:"short_month_en"} {$post.date|date_format:"day_of_month"}, {$post.date|date_format:"year"}</p>
+						<img class="fiximg" src="/img/no.png"/>
+						<span>{$post.url}</span>
+					</div>
+				</div>
+				{/post.link}
+				
+				{?post.audio}
+				<div class="tile">
+					<div class="content">
+						<img src="{$audio.cover}" height="320"/>
+						<span>{$post.url}</span>
+					</div>
+				</div>
+				{/post.audio}
+				
+				{?post.video}
+				<div class="tile">
+					<div class="content">
+						<img src="{$video.cover}" height="320"/>
+						<span>{$post.url}</span>
+					</div>
+				</div>
+				{/post.video}
+				
+				{/loop:posts}
+				<div class="empty_tile last"></div>
+			</div>
+		</div>
+	</div>
+	<div class="drag container" style="display: none"></div>
+	<div class="fanye">
+		{?pagination}
+			{?pagination.next}
+				<div id="next"><a class="fanyearrow" href="{$pagination.next.url}" title="浏览下一页"></a></div>
+			{/pagination.next}
+		
+			{?pagination.prev}
+				<div id="prev"><a class="fanyearrow" href="{$pagination.prev.url}" title="返回上一页" id="prev"></a></div>
+			{/pagination.prev}
+			
+			<script>
+				document.onkeydown = chang_page;
+				function chang_page(e) {
+					var e = e || event, keycode = e.which || e.keyCode;
+					{?pagination.prev}
+					if (keycode == 33 || keycode == 37) location = '{$pagination.prev.url}';
+					{/pagination.prev}
+					{?pagination.next}
+					if (keycode == 34 || keycode == 39) location = '{$pagination.next.url}';
+					{/pagination.next}
+				}
+			</script>
+		{/pagination}
+	
+	</div>
+	<div class="shadow down"></div>
+	{/view.list}
+	{?view.post}
+	<div class="page">
+	{?loop:posts}
+		{?post.text}<!--text-->
+			<h2>{$text.title}</h2>
+			<div class="post rich-content">
+				{$text.content}
+			</div>
+			<footer>
+				<div class="meta">
+					{$post.date|date_format:"short_month_en"} {$post.date|date_format:"day_of_month"}, {$post.date|date_format:"year"}
+				</div>
+				{?post.tag}				
+				<div class="tags">
+					{?loop:post.tags}<a href="{$post.tag.url}" title="{$post.tag.name|nohtml}">{$post.tag.name}</a>{/loop:post.tags}
+				</div>		
+				{/post.tag}
+				<div class="clean"></div>
+			</footer>
+			
+			<div class="notes">{$post.notes}</div>
+		{/post.text}
+		
+		{?post.photo}<!--photo-->
+			<h2>{$photos.title}</h2>
+			<div id="photo">
+				{?loop:photos}
+              		<a href="{$post.url}" title="{?$photos.description}{$photos.description|nohtml}{/$photos.description}" target="_blank"><img src="{$photo.1280.src}"  width="{$photo.auto_size.width}" height="{$photo.auto_size.height}" /></a>		
+          			<div class="post rich-content">
+						{$photo.description}
+					</div>
+          		{/loop:photos}
+          	</div>
+			<div class="post rich-content">
+				{$photos.description}
+			</div>
+			<footer>
+				<div class="meta">
+					{$post.date|date_format:"short_month_en"} {$post.date|date_format:"day_of_month"}, {$post.date|date_format:"year"}
+					
+				</div>
+				{?post.tag}				
+				<div class="tags">
+					{?loop:post.tags}<a href="{$post.tag.url}" title="{$post.tag.name|nohtml}">{$post.tag.name}</a>{/loop:post.tags}
+				</div>		
+				{/post.tag}
+				<div class="clean"></div>
+			</footer>
+			<div class="notes">{$post.notes}</div>
+		{/post.photo}
+		
+		{?post.audio}<!--audio-->
+			<h2>{$audio.artist} - {$audio.song}</h2>
+			<div id="gallerie2">
+				{?$audio.cover}<img class="" src="{$audio.cover}" style="max-height: 270px"/>{/$audio.cover}
+			</div>
+			<div class="post rich-content">
+				<div style="margin: 20px auto">{$audio.player}</div>
+				{$audio.description}
+			</div>
+			<footer>
+				<div class="meta">
+					{$post.date|date_format:"short_month_en"} {$post.date|date_format:"day_of_month"}, {$post.date|date_format:"year"}
+					
+				</div>
+				{?post.tag}				
+				<div class="tags">
+					{?loop:post.tags}<a href="{$post.tag.url}" title="{$post.tag.name|nohtml}">{$post.tag.name}</a>{/loop:post.tags}
+				</div>		
+				{/post.tag}
+				<div class="clean"></div>
+			</footer>
+			<div class="notes">{$post.notes}</div>
+		{/post.audio}
+		{?post.video}<!--video-->
+		<div class="post rich-content">
+			{$video.player}
+			{$video.description}
+		</div>
+		<footer>
+			<div class="meta">
+				{$post.date|date_format:"short_month_en"} {$post.date|date_format:"day_of_month"}, {$post.date|date_format:"year"}
+				
+			</div>
+			{?post.tag}				
+			<div class="tags">
+				{?loop:post.tags}<a href="{$post.tag.url}" title="{$post.tag.name|nohtml}">{$post.tag.name}</a>{/loop:post.tags}
+			</div>		
+			{/post.tag}
+			<div class="clean"></div>
+		</footer>
+		<div class="notes">{$post.notes}</div>
+		{/post.video}
+		{?post.link}
+		<h2><a href="{$link.url}">{?$link.title}{$link.title|nohtml}{/$link.title}{?!$link.title}{$link.url|nohtml}{/!$link.title}</a></h2>
+		<div class="post rich-content">
+			{$link.description}
+		</div>
+		<footer>
+			<div class="meta">
+				{$post.date|date_format:"short_month_en"} {$post.date|date_format:"day_of_month"}, {$post.date|date_format:"year"}
+				
+			</div>
+			{?post.tag}				
+			<div class="tags">
+				{?loop:post.tags}<a href="{$post.tag.url}" title="{$post.tag.name|nohtml}">{$post.tag.name}</a>{/loop:post.tags}
+			</div>		
+			{/post.tag}
+			<div class="clean"></div>
+		</footer>
+		<div class="notes">{$post.notes}</div>
+		{/post.link}
+	{/loop:posts}
+	</div>
+	<div class="fanye">
+		{?pagination}
+			{?pagination.next}
+				<div id="next"><a class="fanyearrow" href="{$pagination.next.url}" title="浏览下一篇"></a></div>
+			{/pagination.next}
+				
+			{?pagination.prev}
+				<div id="prev"><a class="fanyearrow" href="{$pagination.prev.url}" title="返回上一篇" id="prev"></a></div>
+			{/pagination.prev}
+			<script>
+				document.onkeydown = chang_page;
+				function chang_page(e) {
+					var e = e || event, keycode = e.which || e.keyCode;
+					{?pagination.prev}
+					if (keycode == 33 || keycode == 37) location = '{$pagination.prev.url}';
+					{/pagination.prev}
+					{?pagination.next}
+					if (keycode == 34 || keycode == 39) location = '{$pagination.next.url}';
+					{/pagination.next}
+				}
+			</script>
+		{/pagination}
+	
+	</div>
+	{/view.post}
+	
+	<div id="footer" class="container">
+		<ul>
+			{?$_社交网络.新浪微博}
+			<li class="sina" id="80">
+				<span class="icon"></span>
+				<span class="title">新浪微博</span>
+				<span class="link">{$_社交网络.新浪微博}</span>
+				
+			</li>
+			{/$_社交网络.新浪微博}
+			{?$_社交网络.腾讯微博}
+			<li class="tengxun" id="80">
+				<span class="icon"></span>
+				<span class="title">腾讯微博</span>
+				<span class="link">{$_社交网络.腾讯微博}</span>
+			</li>
+			{/$_社交网络.腾讯微博}
+			{?$_社交网络.人人}
+			<li class="renren" id="60">
+				<span class="icon"></span>
+				<span class="title">人人</span>
+				<span class="link">{$_社交网络.人人}</span>
+			</li>
+			{/$_社交网络.人人}
+			{?$_社交网络.豆瓣}
+			<li class="douban" id="60">
+				<span class="icon"></span>
+				<span class="title">豆瓣</span>
+				<span class="link">{$_社交网络.豆瓣}</span>
+			</li>
+			{/$_社交网络.豆瓣}
+		</ul>
+	</div>
+	<script type="text/javascript">
+		$(function() {
+			var LIST_ITEM_WIDTH = 104, LIST_ITEM_HEIGHT = 104,
+            imgs = $('.logo img');
+            
+			$.each(imgs, function(idx, img){
+            function fixImg(){
+                var width = img.width,
+                    height = img.height,
+                    newWidth = width, newHeight = height,
+                    marginTop, marginLeft;
+                    
+                if(!newWidth || !newHeight) return;
+                    
+                if(newWidth < LIST_ITEM_WIDTH){
+                    newWidth = LIST_ITEM_WIDTH;
+                    newHeight = newWidth / width * height;
+                }
+                
+                if(newHeight < LIST_ITEM_HEIGHT){
+                    newHeight = LIST_ITEM_HEIGHT;
+                    newWidth = newHeight / height * width;
+                }
+                
+                marginTop = (LIST_ITEM_HEIGHT - newHeight)/2;
+                marginLeft = (LIST_ITEM_WIDTH - newWidth)/2;
+                
+                img.width = newWidth;
+                img.height = newHeight;
+                
+                $(img).css({'margin-top':marginTop, 'margin-left':marginLeft});
+                
+                //img.onload = null; 
+            }
+            
+            img.onload = function(){
+                fixImg();
+                img.onload = null;
+            }
+            
+            fixImg();
+        });
+ 		})
+   	</script>
+</body>
+</html>
